@@ -1,0 +1,30 @@
+name: SAST Using Fortify
+
+on:
+  push:
+    branches:
+      - fortify-sast
+
+jobs:
+  run_analysis:
+    name: Run Analysis
+    runs-on: [self-hosted, sec]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          path: moveit2
+      - name: Run analysis
+        id: run_analysis
+        run: |
+          docker run --rm \
+              -v ./moveit2:/opt/moveit2_ws/src/moveit2 \
+              -v ./results:/opt/results \
+              -v moveit2_sast_ccache:/tmp/.ccache \
+              -v moveit2_sast_build:/opt/moveit2_ws/build \
+              moveit2:humble-sast \
+              bash /opt/moveit2_ws/src/moveit2/fortify_sast/analyze_in_container.sh
+      - name: Upload Analysis Results
+        uses: actions/upload-artifact@v6
+        with:
+          path: results/moveit2_sast_result.fpr
