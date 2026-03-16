@@ -65,7 +65,6 @@ def doRound(values, decimal_places):
 # -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-
     # Check input arguments
     try:
         input_file = sys.argv[1]
@@ -116,4 +115,4 @@ if __name__ == "__main__":
 
     # save changes
     with open(output_file_name, "wb") as f:
-       dom.write(f, encoding="utf-8")
+        dom.write(f, encoding="utf-8")
