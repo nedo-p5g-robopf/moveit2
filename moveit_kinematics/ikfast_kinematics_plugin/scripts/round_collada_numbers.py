@@ -64,7 +64,6 @@ def doRound(values, decimal_places):
 # -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-
     # Check input arguments
     try:
         input_file = sys.argv[1]
@@ -81,9 +80,7 @@ if __name__ == "__main__":
     print("\nCollada Number Rounder")
     print("Rounding numbers to", decimal_places, "decimal places\n")
 
-    parser = etree.XMLParser(
-        resolve_entities=False
-    )
+    parser = etree.XMLParser(resolve_entities=False)
     namespace = "http://www.collada.org/2008/03/COLLADASchema"
     dom = etree.parse(input_file, parser=parser)
 
