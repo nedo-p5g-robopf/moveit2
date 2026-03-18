@@ -65,12 +65,27 @@ bool extractPackageNameFromPath(const std::filesystem::path& path, std::string& 
       auto is_open = package_xml_file.LoadFile((sub_path / "package.xml").string().c_str());
       if (is_open == tinyxml2::XML_SUCCESS)
       {
-        auto name_potential =
-            package_xml_file.FirstChildElement("package")->FirstChildElement("name")->FirstChild()->ToText()->Value();
-        if (name_potential)
+        auto pkg = package_xml_file.FirstChildElement("package");
+        if (pkg)
         {
-          // Change package name if we have non-empty potential, else it defaults
-          package_name = name_potential;
+          auto name_elem = pkg->FirstChildElement("name");
+          if (name_elem)
+          {
+            auto name_child = name_elem->FirstChild();
+            if (name_child)
+            {
+              auto xml_text = name_child->ToText();
+              if (xml_text)
+              {
+                auto name_potential = xml_text->Value();
+                if (name_potential)
+                {
+                  // Change package name if we have non-empty potential, else it defaults
+                  package_name = name_potential;
+                }
+              }
+            }
+          }
         }
       }
       return true;

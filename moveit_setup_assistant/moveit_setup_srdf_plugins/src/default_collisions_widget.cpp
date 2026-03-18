@@ -426,6 +426,11 @@ void DefaultCollisionsWidget::hideSections()
     list << clicked_section_;
   }
 
+  if (!header)
+  {
+    return;
+  }
+
   for (auto index : list)
     header->setSectionHidden(index, true);
 }
@@ -454,6 +459,11 @@ void DefaultCollisionsWidget::hideOtherSections()
   {
     list.clear();
     list << clicked_section_;
+  }
+
+  if (!header)
+  {
+    return;
   }
 
   // first hide all sections
