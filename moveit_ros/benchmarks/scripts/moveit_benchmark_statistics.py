@@ -50,6 +50,7 @@ import numpy as np
 from math import floor
 from optparse import OptionParser, OptionGroup
 
+
 # Given a text line, split it into tokens (by space) and return the token
 # at the desired index. Additionally, test that some expected tokens exist.
 # Return None if they do not.
@@ -399,19 +400,22 @@ def plotAttribute(cur, planners, attribute, typename):
     measurements = []
     nanCounts = []
     if typename == "ENUM":
-        cur.execute('SELECT description FROM enums where name IS "%s"' % attribute)
+        cur.execute("SELECT description FROM enums where name IS ?", attribute)
         descriptions = [t[0] for t in cur.fetchall()]
         numValues = len(descriptions)
     for planner in planners:
         cur.execute(
-            "SELECT %s FROM runs WHERE plannerid = %s AND %s IS NOT NULL"
-            % (attribute, planner[0], attribute)
+            "SELECT ? FROM runs WHERE plannerid = ? AND ? IS NOT NULL",
+            attribute,
+            planner[0],
+            attribute,
         )
         measurement = [t[0] for t in cur.fetchall() if t[0] != None]
         if len(measurement) > 0:
             cur.execute(
-                "SELECT count(*) FROM runs WHERE plannerid = %s AND %s IS NULL"
-                % (planner[0], attribute)
+                "SELECT count(*) FROM runs WHERE plannerid = ? AND ? IS NULL",
+                planner[0],
+                attribute,
             )
             nanCounts.append(cur.fetchone()[0])
             labels.append(planner[1])
@@ -522,10 +526,12 @@ def plotProgressAttribute(cur, planners, attribute):
     plannerNames = []
     for planner in planners:
         cur.execute(
-            """SELECT count(progress.%s) FROM progress INNER JOIN runs
-            ON progress.runid = runs.id AND runs.plannerid=%s
-            AND progress.%s IS NOT NULL"""
-            % (attribute, planner[0], attribute)
+            """SELECT count(progress.?) FROM progress INNER JOIN runs
+            ON progress.runid = runs.id AND runs.plannerid=?
+            AND progress.? IS NOT NULL""",
+            attribute,
+            planner[0],
+            attribute,
         )
         if cur.fetchone()[0] > 0:
             plannerNames.append(planner[1])
@@ -540,8 +546,9 @@ def plotProgressAttribute(cur, planners, attribute):
             for r in runids:
                 # Select data for given run
                 cur.execute(
-                    "SELECT time, %s FROM progress WHERE runid = %s ORDER BY time"
-                    % (attribute, r)
+                    "SELECT time, ? FROM progress WHERE runid = ? ORDER BY time",
+                    attribute,
+                    r,
                 )
                 (time, data) = zip(*(cur.fetchall()))
                 timeTable.append(time)
@@ -609,9 +616,9 @@ def plotStatistics(dbname, fname):
     experiments = c.fetchall()
     for experiment in experiments:
         c.execute(
-            """SELECT count(*) FROM runs WHERE runs.experimentid = %d
-            GROUP BY runs.plannerid"""
-            % experiment[0]
+            """SELECT count(*) FROM runs WHERE runs.experimentid = ? 
+            GROUP BY runs.plannerid""",
+            experiment[0],
         )
         numRuns = [run[0] for run in c.fetchall()]
         numRuns = numRuns[0] if len(set(numRuns)) == 1 else ",".join(numRuns)
