@@ -795,7 +795,7 @@ bool VisibilityConstraint::configure(const moveit_msgs::msg::VisibilityConstrain
     cone_sides_ = 3;
   }
   else
-    cone_sides_ = vc.cone_sides;
+    cone_sides_ = static_cast<unsigned int>(vc.cone_sides);
 
   // compute the points on the base circle of the cone that make up the cone sides
   points_.clear();

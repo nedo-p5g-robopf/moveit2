@@ -59,7 +59,7 @@ public:
    */
   LaunchBundle(const std::string& title, const std::string& description, const std::string& launch_name,
                const std::set<std::string>& dependencies = {})
-    : title_(title), description_(description), launch_name_(launch_name), dependencies_(dependencies), id_(-1)
+    : title_(title), description_(description), launch_name_(launch_name), dependencies_(dependencies), id_(UINT_MAX)
   {
   }
 

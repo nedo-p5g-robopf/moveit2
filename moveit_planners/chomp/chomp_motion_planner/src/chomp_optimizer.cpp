@@ -418,7 +418,9 @@ bool ChompOptimizer::optimize()
     {
       if (c_cost < parameters_->collision_threshold_)
       {
-        num_collision_free_iterations_ = parameters_->max_iterations_after_collision_free_;
+        num_collision_free_iterations_ = parameters_->max_iterations_after_collision_free_ >= 0 ?
+                                             parameters_->max_iterations_after_collision_free_ :
+                                             5;
         is_collision_free_ = true;
         iteration_++;
         should_break_out = true;

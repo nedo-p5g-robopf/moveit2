@@ -161,7 +161,7 @@ void MoveGroupSequenceAction::executeSequenceCallbackPlanAndExecute(
           clearSceneRobotState(goal->planning_options.planning_scene_diff);
 
   opt.replan_ = goal->planning_options.replan;
-  opt.replan_attempts_ = goal->planning_options.replan_attempts;
+  opt.replan_attempts_ = static_cast<unsigned int>(std::max(goal->planning_options.replan_attempts, 0));
   opt.replan_delay_ = goal->planning_options.replan_delay;
   opt.before_execution_callback_ = [this] { startMoveExecutionCallback(); };
 

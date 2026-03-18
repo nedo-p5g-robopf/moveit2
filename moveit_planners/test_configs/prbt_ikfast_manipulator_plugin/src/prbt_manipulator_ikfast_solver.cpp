@@ -370,7 +370,7 @@ unsigned char _ij0[2], _nj0,_ij1[2], _nj1,_ij2[2], _nj2,_ij3[2], _nj3,_ij4[2], _
 IkReal j100, cj100, sj100;
 unsigned char _ij100[2], _nj100;
   bool ComputeIk(const IkReal* eetrans, const IkReal* eerot, const IkReal* /* unused */, IkSolutionListBase<IkReal>& solutions) {
-j0=numeric_limits<IkReal>::quiet_NaN(); _ij0[0] = -1; _ij0[1] = -1; _nj0 = -1; j1=numeric_limits<IkReal>::quiet_NaN(); _ij1[0] = -1; _ij1[1] = -1; _nj1 = -1; j2=numeric_limits<IkReal>::quiet_NaN(); _ij2[0] = -1; _ij2[1] = -1; _nj2 = -1; j3=numeric_limits<IkReal>::quiet_NaN(); _ij3[0] = -1; _ij3[1] = -1; _nj3 = -1; j4=numeric_limits<IkReal>::quiet_NaN(); _ij4[0] = -1; _ij4[1] = -1; _nj4 = -1; j5=numeric_limits<IkReal>::quiet_NaN(); _ij5[0] = -1; _ij5[1] = -1; _nj5 = -1;
+j0=numeric_limits<IkReal>::quiet_NaN(); _ij0[0] = UCHAR_MAX; _ij0[1] = UCHAR_MAX; _nj0 = UCHAR_MAX; j1=numeric_limits<IkReal>::quiet_NaN(); _ij1[0] = UCHAR_MAX; _ij1[1] = UCHAR_MAX; _nj1 = UCHAR_MAX; j2=numeric_limits<IkReal>::quiet_NaN(); _ij2[0] = UCHAR_MAX; _ij2[1] = UCHAR_MAX; _nj2 = UCHAR_MAX; j3=numeric_limits<IkReal>::quiet_NaN(); _ij3[0] = UCHAR_MAX; _ij3[1] = UCHAR_MAX; _nj3 = UCHAR_MAX; j4=numeric_limits<IkReal>::quiet_NaN(); _ij4[0] = UCHAR_MAX; _ij4[1] = UCHAR_MAX; _nj4 = UCHAR_MAX; j5=numeric_limits<IkReal>::quiet_NaN(); _ij5[0] = UCHAR_MAX; _ij5[1] = UCHAR_MAX; _nj5 = UCHAR_MAX;
 for(int dummyiter = 0; dummyiter < 1; ++dummyiter) {
     solutions.Clear();
 r00 = eerot[0*3+0];
@@ -433,14 +433,14 @@ else if( isnan(cj2array[0]) )
     j2valid[0] = true;
     cj2array[0] = 1; sj2array[0] = 0; j2array[0] = 0;
 }
-for(int ij2 = 0; ij2 < 2; ++ij2)
+for(unsigned int ij2 = 0; ij2 < 2; ++ij2)
 {
 if( !j2valid[ij2] )
 {
     continue;
 }
-_ij2[0] = ij2; _ij2[1] = -1;
-for(int iij2 = ij2+1; iij2 < 2; ++iij2)
+_ij2[0] = ij2; _ij2[1] = UCHAR_MAX;
+for(unsigned int iij2 = ij2+1; iij2 < 2; ++iij2)
 {
 if( j2valid[iij2] && IKabs(cj2array[ij2]-cj2array[iij2]) < IKFAST_SOLUTION_THRESH && IKabs(sj2array[ij2]-sj2array[iij2]) < IKFAST_SOLUTION_THRESH )
 {
@@ -505,14 +505,14 @@ else if( j1array[1] < -IKPI )
 {    j1array[1]+=IK2PI;
 }
 j1valid[1] = true;
-for(int ij1 = 0; ij1 < 2; ++ij1)
+for(unsigned int ij1 = 0; ij1 < 2; ++ij1)
 {
 if( !j1valid[ij1] )
 {
     continue;
 }
-_ij1[0] = ij1; _ij1[1] = -1;
-for(int iij1 = ij1+1; iij1 < 2; ++iij1)
+_ij1[0] = ij1; _ij1[1] = UCHAR_MAX;
+for(unsigned int iij1 = ij1+1; iij1 < 2; ++iij1)
 {
 if( j1valid[iij1] && IKabs(cj1array[ij1]-cj1array[iij1]) < IKFAST_SOLUTION_THRESH && IKabs(sj1array[ij1]-sj1array[iij1]) < IKFAST_SOLUTION_THRESH )
 {
@@ -526,7 +526,7 @@ j1 = j1array[ij1]; cj1 = cj1array[ij1]; sj1 = sj1array[ij1];
 // that j0 is free. So we simply choose 4 values and pass directly to the
 // rotationfunction (orientation computation is unchanged).
 _nj0=4;
-for(int ij0=1; ij0 < _nj0; ++ij0)
+for(unsigned int ij0=1; ij0 < _nj0; ++ij0)
 {
 j0=(IkReal)(ij0 - 1) * (3.14159265358979) / 2.;  // -pi/2, 0, pi/2, pi
 cj0=IKcos(j0);
@@ -575,14 +575,14 @@ else if( j0array[1] < -IKPI )
 {    j0array[1]+=IK2PI;
 }
 j0valid[1] = true;
-for(int ij0 = 0; ij0 < 2; ++ij0)
+for(unsigned int ij0 = 0; ij0 < 2; ++ij0)
 {
 if( !j0valid[ij0] )
 {
     continue;
 }
-_ij0[0] = ij0; _ij0[1] = -1;
-for(int iij0 = ij0+1; iij0 < 2; ++iij0)
+_ij0[0] = ij0; _ij0[1] = UCHAR_MAX;
+for(unsigned int iij0 = ij0+1; iij0 < 2; ++iij0)
 {
 if( j0valid[iij0] && IKabs(cj0array[ij0]-cj0array[iij0]) < IKFAST_SOLUTION_THRESH && IKabs(sj0array[ij0]-sj0array[iij0]) < IKFAST_SOLUTION_THRESH )
 {
@@ -660,14 +660,14 @@ else if( j1array[0] < -IKPI )
 {    j1array[0]+=IK2PI;
 }
 j1valid[0] = true;
-for(int ij1 = 0; ij1 < 1; ++ij1)
+for(unsigned int ij1 = 0; ij1 < 1; ++ij1)
 {
 if( !j1valid[ij1] )
 {
     continue;
 }
-_ij1[0] = ij1; _ij1[1] = -1;
-for(int iij1 = ij1+1; iij1 < 1; ++iij1)
+_ij1[0] = ij1; _ij1[1] = UCHAR_MAX;
+for(unsigned int iij1 = ij1+1; iij1 < 1; ++iij1)
 {
 if( j1valid[iij1] && IKabs(cj1array[ij1]-cj1array[iij1]) < IKFAST_SOLUTION_THRESH && IKabs(sj1array[ij1]-sj1array[iij1]) < IKFAST_SOLUTION_THRESH )
 {
@@ -734,14 +734,14 @@ else if( j1array[0] < -IKPI )
 {    j1array[0]+=IK2PI;
 }
 j1valid[0] = true;
-for(int ij1 = 0; ij1 < 1; ++ij1)
+for(unsigned int ij1 = 0; ij1 < 1; ++ij1)
 {
 if( !j1valid[ij1] )
 {
     continue;
 }
-_ij1[0] = ij1; _ij1[1] = -1;
-for(int iij1 = ij1+1; iij1 < 1; ++iij1)
+_ij1[0] = ij1; _ij1[1] = UCHAR_MAX;
+for(unsigned int iij1 = ij1+1; iij1 < 1; ++iij1)
 {
 if( j1valid[iij1] && IKabs(cj1array[ij1]-cj1array[iij1]) < IKFAST_SOLUTION_THRESH && IKabs(sj1array[ij1]-sj1array[iij1]) < IKFAST_SOLUTION_THRESH )
 {
@@ -808,14 +808,14 @@ else if( j1array[0] < -IKPI )
 {    j1array[0]+=IK2PI;
 }
 j1valid[0] = true;
-for(int ij1 = 0; ij1 < 1; ++ij1)
+for(unsigned int ij1 = 0; ij1 < 1; ++ij1)
 {
 if( !j1valid[ij1] )
 {
     continue;
 }
-_ij1[0] = ij1; _ij1[1] = -1;
-for(int iij1 = ij1+1; iij1 < 1; ++iij1)
+_ij1[0] = ij1; _ij1[1] = UCHAR_MAX;
+for(unsigned int iij1 = ij1+1; iij1 < 1; ++iij1)
 {
 if( j1valid[iij1] && IKabs(cj1array[ij1]-cj1array[iij1]) < IKFAST_SOLUTION_THRESH && IKabs(sj1array[ij1]-sj1array[iij1]) < IKFAST_SOLUTION_THRESH )
 {
@@ -907,14 +907,14 @@ else if( isnan(cj4array[0]) )
     j4valid[0] = true;
     cj4array[0] = 1; sj4array[0] = 0; j4array[0] = 0;
 }
-for(int ij4 = 0; ij4 < 2; ++ij4)
+for(unsigned int ij4 = 0; ij4 < 2; ++ij4)
 {
 if( !j4valid[ij4] )
 {
     continue;
 }
-_ij4[0] = ij4; _ij4[1] = -1;
-for(int iij4 = ij4+1; iij4 < 2; ++iij4)
+_ij4[0] = ij4; _ij4[1] = UCHAR_MAX;
+for(unsigned int iij4 = ij4+1; iij4 < 2; ++iij4)
 {
 if( j4valid[iij4] && IKabs(cj4array[ij4]-cj4array[iij4]) < IKFAST_SOLUTION_THRESH && IKabs(sj4array[ij4]-sj4array[iij4]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1104,7 +1104,7 @@ op[3]=(x94+(((-1.0)*x92)));
 op[4]=x95;
 polyroots4(op,zeror,numroots);
 IkReal j3array[4], cj3array[4], sj3array[4], tempj3array[1];
-int numsolutions = 0;
+unsigned int numsolutions = 0;
 for(int ij3 = 0; ij3 < numroots; ++ij3)
 {
 IkReal htj3 = zeror[ij3];
@@ -1127,7 +1127,7 @@ numsolutions++;
 }
 bool j3valid[4]={true,true,true,true};
 _nj3 = 4;
-for(int ij3 = 0; ij3 < numsolutions; ++ij3)
+for(unsigned int ij3 = 0; ij3 < numsolutions; ++ij3)
     {
 if( !j3valid[ij3] )
 {
@@ -1148,8 +1148,8 @@ if( IKabs(j3evalpoly[0]) > 0.0000001000000000  )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < numsolutions; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < numsolutions; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1214,14 +1214,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1309,14 +1309,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1440,14 +1440,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1540,14 +1540,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1683,14 +1683,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1784,14 +1784,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -1928,14 +1928,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2028,14 +2028,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2171,14 +2171,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2272,14 +2272,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2401,14 +2401,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2510,14 +2510,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2622,14 +2622,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2762,14 +2762,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2850,14 +2850,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -2958,14 +2958,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3062,14 +3062,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3164,14 +3164,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3266,14 +3266,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3369,14 +3369,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3473,7 +3473,7 @@ op[1]=0;
 op[2]=1.0;
 polyroots2(op,zeror,numroots);
 IkReal j5array[2], cj5array[2], sj5array[2], tempj5array[1];
-int numsolutions = 0;
+unsigned int numsolutions = 0;
 for(int ij5 = 0; ij5 < numroots; ++ij5)
 {
 IkReal htj5 = zeror[ij5];
@@ -3496,7 +3496,7 @@ numsolutions++;
 }
 bool j5valid[2]={true,true};
 _nj5 = 2;
-for(int ij5 = 0; ij5 < numsolutions; ++ij5)
+for(unsigned int ij5 = 0; ij5 < numsolutions; ++ij5)
     {
 if( !j5valid[ij5] )
 {
@@ -3505,8 +3505,8 @@ if( !j5valid[ij5] )
     j5 = j5array[ij5]; cj5 = cj5array[ij5]; sj5 = sj5array[ij5];
 htj5 = IKtan(j5/2);
 
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < numsolutions; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < numsolutions; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3608,14 +3608,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3725,14 +3725,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3839,14 +3839,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -3959,14 +3959,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4047,14 +4047,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4155,14 +4155,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4259,14 +4259,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4361,14 +4361,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4463,14 +4463,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4566,14 +4566,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4670,7 +4670,7 @@ op[1]=0;
 op[2]=1.0;
 polyroots2(op,zeror,numroots);
 IkReal j5array[2], cj5array[2], sj5array[2], tempj5array[1];
-int numsolutions = 0;
+unsigned int numsolutions = 0;
 for(int ij5 = 0; ij5 < numroots; ++ij5)
 {
 IkReal htj5 = zeror[ij5];
@@ -4693,7 +4693,7 @@ numsolutions++;
 }
 bool j5valid[2]={true,true};
 _nj5 = 2;
-for(int ij5 = 0; ij5 < numsolutions; ++ij5)
+for(unsigned int ij5 = 0; ij5 < numsolutions; ++ij5)
     {
 if( !j5valid[ij5] )
 {
@@ -4702,8 +4702,8 @@ if( !j5valid[ij5] )
     j5 = j5array[ij5]; cj5 = cj5array[ij5]; sj5 = sj5array[ij5];
 htj5 = IKtan(j5/2);
 
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < numsolutions; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < numsolutions; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4805,14 +4805,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -4922,14 +4922,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5036,14 +5036,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5156,14 +5156,14 @@ else if( j5array[0] < -IKPI )
 {    j5array[0]+=IK2PI;
 }
 j5valid[0] = true;
-for(int ij5 = 0; ij5 < 1; ++ij5)
+for(unsigned int ij5 = 0; ij5 < 1; ++ij5)
 {
 if( !j5valid[ij5] )
 {
     continue;
 }
-_ij5[0] = ij5; _ij5[1] = -1;
-for(int iij5 = ij5+1; iij5 < 1; ++iij5)
+_ij5[0] = ij5; _ij5[1] = UCHAR_MAX;
+for(unsigned int iij5 = ij5+1; iij5 < 1; ++iij5)
 {
 if( j5valid[iij5] && IKabs(cj5array[ij5]-cj5array[iij5]) < IKFAST_SOLUTION_THRESH && IKabs(sj5array[ij5]-sj5array[iij5]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5394,14 +5394,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5583,14 +5583,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5685,14 +5685,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5787,14 +5787,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -5949,14 +5949,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6044,14 +6044,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6144,14 +6144,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6333,14 +6333,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6435,14 +6435,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6537,14 +6537,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6663,14 +6663,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6770,14 +6770,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -6877,14 +6877,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7115,14 +7115,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7305,14 +7305,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7408,14 +7408,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7511,14 +7511,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7676,14 +7676,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7771,14 +7771,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -7871,14 +7871,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8057,14 +8057,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8158,14 +8158,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8259,14 +8259,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8384,14 +8384,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8490,14 +8490,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8596,14 +8596,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8704,14 +8704,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8804,14 +8804,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -8950,14 +8950,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9051,14 +9051,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9173,14 +9173,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9276,14 +9276,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9377,14 +9377,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9511,14 +9511,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9635,14 +9635,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9776,14 +9776,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9878,14 +9878,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -9980,14 +9980,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10110,14 +10110,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10215,14 +10215,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10321,14 +10321,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10624,14 +10624,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10720,14 +10720,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -10912,14 +10912,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11015,14 +11015,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11118,14 +11118,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11257,14 +11257,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11352,14 +11352,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11538,14 +11538,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11641,14 +11641,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11744,14 +11744,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11870,14 +11870,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -11975,14 +11975,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12080,14 +12080,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12334,14 +12334,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12430,14 +12430,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12619,14 +12619,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12722,14 +12722,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12825,14 +12825,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -12963,14 +12963,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13058,14 +13058,14 @@ else if( isnan(cj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13244,14 +13244,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13347,14 +13347,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13450,14 +13450,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13576,14 +13576,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13683,14 +13683,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -13790,14 +13790,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14045,14 +14045,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14140,14 +14140,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14332,14 +14332,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14434,14 +14434,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14536,14 +14536,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14648,14 +14648,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14840,14 +14840,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -14944,14 +14944,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15046,14 +15046,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15235,14 +15235,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15337,14 +15337,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15439,14 +15439,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15566,14 +15566,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15671,14 +15671,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -15776,14 +15776,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16029,14 +16029,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16124,14 +16124,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16316,14 +16316,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16419,14 +16419,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16522,14 +16522,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16635,14 +16635,14 @@ else if( isnan(sj3array[0]) )
     j3valid[0] = true;
     cj3array[0] = 1; sj3array[0] = 0; j3array[0] = 0;
 }
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16830,14 +16830,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -16934,14 +16934,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17036,14 +17036,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17228,14 +17228,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17329,14 +17329,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17430,14 +17430,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17556,14 +17556,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17662,14 +17662,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17768,14 +17768,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17876,14 +17876,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -17976,14 +17976,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18123,14 +18123,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18225,14 +18225,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18327,14 +18327,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18462,14 +18462,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18586,14 +18586,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18715,14 +18715,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18817,14 +18817,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -18949,14 +18949,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19054,14 +19054,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19159,14 +19159,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19312,14 +19312,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19419,14 +19419,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19526,14 +19526,14 @@ else if( j3array[1] < -IKPI )
 {    j3array[1]+=IK2PI;
 }
 j3valid[1] = true;
-for(int ij3 = 0; ij3 < 2; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 2; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 2; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 2; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19652,14 +19652,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {
@@ -19771,14 +19771,14 @@ else if( j3array[0] < -IKPI )
 {    j3array[0]+=IK2PI;
 }
 j3valid[0] = true;
-for(int ij3 = 0; ij3 < 1; ++ij3)
+for(unsigned int ij3 = 0; ij3 < 1; ++ij3)
 {
 if( !j3valid[ij3] )
 {
     continue;
 }
-_ij3[0] = ij3; _ij3[1] = -1;
-for(int iij3 = ij3+1; iij3 < 1; ++iij3)
+_ij3[0] = ij3; _ij3[1] = UCHAR_MAX;
+for(unsigned int iij3 = ij3+1; iij3 < 1; ++iij3)
 {
 if( j3valid[iij3] && IKabs(cj3array[ij3]-cj3array[iij3]) < IKFAST_SOLUTION_THRESH && IKabs(sj3array[ij3]-sj3array[iij3]) < IKFAST_SOLUTION_THRESH )
 {

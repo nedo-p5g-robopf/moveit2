@@ -71,7 +71,7 @@ struct ThreadComputation
     : scene_(scene)
     , req_(req)
     , thread_id_(thread_id)
-    , num_trials_(num_trials)
+    , num_trials_(static_cast<unsigned int>(num_trials))
     , links_seen_colliding_(links_seen_colliding)
     , lock_(lock)
     , progress_(progress)
@@ -442,7 +442,7 @@ unsigned int disableAdjacentLinks(planning_scene::PlanningScene& scene, LinkGrap
   }
   // RCLCPP_INFO_STREAM(LOGGER, "Disabled %d adjacent link pairs from collision checking", num_disabled);
 
-  return num_disabled;
+  return static_cast<unsigned int>(num_disabled);
 }
 
 // ******************************************************************************************
@@ -470,7 +470,7 @@ unsigned int disableDefaultCollisions(planning_scene::PlanningScene& scene, Link
 
   // RCLCPP_INFO_STREAM(LOGGER, "Disabled %d link pairs that are in collision in default state from collision checking", num_disabled);
 
-  return num_disabled;
+  return static_cast<unsigned int>(num_disabled);
 }
 
 // ******************************************************************************************

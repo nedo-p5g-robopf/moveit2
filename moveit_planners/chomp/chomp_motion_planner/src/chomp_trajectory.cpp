@@ -86,7 +86,7 @@ ChompTrajectory::ChompTrajectory(const ChompTrajectory& source_traj, const std::
       source_traj_point = 0;
     if (static_cast<size_t>(source_traj_point) >= source_traj.num_points_)
       source_traj_point = source_traj.num_points_ - 1;
-    full_trajectory_index_[i] = source_traj_point;
+    full_trajectory_index_[i] = static_cast<std::size_t>(source_traj_point);
     getTrajectoryPoint(i) = const_cast<ChompTrajectory&>(source_traj).getTrajectoryPoint(source_traj_point);
   }
 }
