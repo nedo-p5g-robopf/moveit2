@@ -485,9 +485,9 @@ static void runThreads(int ncheck, int nset, int nmod)
 
   typedef int* int_ptr;
   typedef std::thread* thread_ptr;
-  int* cnt = new int[num];
-  int_ptr* counters = new int_ptr[num + 1];
-  thread_ptr* threads = new thread_ptr[num];
+  std::unique_ptr<int[]> cnt = std::make_unique<int[]>(num);
+  std::unique_ptr<int_ptr[]> counters = std::make_unique<int_ptr[]>(num + 1);
+  std::unique_ptr<thread_ptr[]> threads = std::make_unique<thread_ptr[]>(num);
 
   int p = 0;
   double val = 0.1;
@@ -527,7 +527,7 @@ static void runThreads(int ncheck, int nset, int nmod)
 
   // this thread waits for all the other threads to make progress, then stops
   // everything.
-  std::thread wthread(&MyInfo::waitThreadFunc, &info, &ls1, counters, 1000);
+  std::thread wthread(&MyInfo::waitThreadFunc, &info, &ls1, counters.get(), 1000);
 
   // wait for all threads to finish
   for (int i = 0; i < p; ++i)
@@ -547,9 +547,9 @@ static void runThreads(int ncheck, int nset, int nmod)
   {
     delete threads[i];
   }
-  delete[] cnt;
-  delete[] counters;
-  delete[] threads;
+  cnt.reset();
+  counters.reset();
+  threads.reset();
 }
 
 TEST(LockedRobotState, set1)
