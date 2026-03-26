@@ -44,6 +44,7 @@ from __future__ import print_function
 from lxml import etree
 import shlex
 import sys
+import os
 
 
 def doRound(values, decimal_places):
@@ -64,7 +65,6 @@ def doRound(values, decimal_places):
 # -----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-
     # Check input arguments
     try:
         input_file = sys.argv[1]
@@ -77,6 +77,10 @@ if __name__ == "__main__":
         )
         print("Rounds all the numbers to <decimal places> places\n")
         sys.exit(-1)
+
+    base_dir = os.path.realpath("./")
+    output_basename = os.path.basename(output_file)
+    output_file_name = os.path.joint(base_dir, output_basename)
 
     print("\nCollada Number Rounder")
     print("Rounding numbers to", decimal_places, "decimal places\n")
@@ -110,5 +114,5 @@ if __name__ == "__main__":
         elements[i].text = doRound(elements[i].text, decimal_places)
 
     # save changes
-    with open(output_file, "wb") as f:
+    with open(output_file_name, "wb") as f:
         dom.write(f, encoding="utf-8")
