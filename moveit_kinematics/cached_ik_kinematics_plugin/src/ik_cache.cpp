@@ -37,6 +37,7 @@
 #include <numeric>
 #include <filesystem>
 #include <fstream>
+#include <vector>
 
 #include <moveit/cached_ik_kinematics_plugin/cached_ik_kinematics_plugin.h>
 
@@ -104,7 +105,7 @@ void IKCache::initializeCache(const std::string& robot_id, const std::string& gr
     unsigned int config_size = num_dofs * sizeof(double);
     unsigned int offset_conf = pose_size * num_tips;
     unsigned int bufsize = offset_conf + config_size;
-    char* buffer = new char[bufsize];
+    std::vector<char> buffer(bufsize);
     IKEntry entry;
     entry.first.resize(num_tips);
     entry.second.resize(num_dofs);
@@ -113,18 +114,17 @@ void IKCache::initializeCache(const std::string& robot_id, const std::string& gr
     for (unsigned i = 0; i < last_saved_cache_size_; ++i)
     {
       unsigned int j = 0;
-      cache_file.read(buffer, bufsize);
+      cache_file.read(buffer.data(), bufsize);
       for (auto& pose : entry.first)
       {
-        memcpy(&pose.position[0], buffer + j * pose_size, position_size);
-        memcpy(&pose.orientation[0], buffer + j * pose_size + position_size, orientation_size);
+        memcpy(&pose.position[0], buffer.data() + j * pose_size, position_size);
+        memcpy(&pose.orientation[0], buffer.data() + j * pose_size + position_size, orientation_size);
         ++j;
       }
-      memcpy(&entry.second[0], buffer + offset_conf, config_size);
+      memcpy(&entry.second[0], buffer.data() + offset_conf, config_size);
       ik_cache_.push_back(entry);
     }
     RCLCPP_INFO(LOGGER, "freeing buffer");
-    delete[] buffer;
     RCLCPP_INFO(LOGGER, "freed buffer");
     std::vector<IKEntry*> ik_entry_ptrs(last_saved_cache_size_);
     for (unsigned int i = 0; i < last_saved_cache_size_; ++i)
