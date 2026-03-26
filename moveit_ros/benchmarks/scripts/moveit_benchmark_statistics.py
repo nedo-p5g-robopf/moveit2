@@ -616,7 +616,7 @@ def plotStatistics(dbname, fname):
     experiments = c.fetchall()
     for experiment in experiments:
         c.execute(
-            """SELECT count(*) FROM runs WHERE runs.experimentid = ? 
+            """SELECT count(*) FROM runs WHERE runs.experimentid = ?
             GROUP BY runs.plannerid""",
             experiment[0],
         )
