@@ -967,10 +967,10 @@ shapes::Mesh* VisibilityConstraint::getVisibilityCone(const moveit::core::RobotS
 void VisibilityConstraint::getMarkers(const moveit::core::RobotState& state,
                                       visualization_msgs::msg::MarkerArray& markers) const
 {
-  shapes::Mesh* m = getVisibilityCone(state);
+  std::unique_ptr<shapes::Mesh> m(getVisibilityCone(state));
   visualization_msgs::msg::Marker mk;
-  shapes::constructMarkerFromShape(m, mk);
-  delete m;
+  shapes::constructMarkerFromShape(m.get(), mk);
+  m.reset();
   mk.header.frame_id = robot_model_->getModelFrame();
   mk.header.stamp = rclcpp::Clock().now();
   mk.ns = "constraints";

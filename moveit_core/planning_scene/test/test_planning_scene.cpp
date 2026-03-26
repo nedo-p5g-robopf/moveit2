@@ -332,7 +332,7 @@ TEST_P(CollisionDetectorTests, ClearDiff)
   // create collision request variables
   collision_detection::CollisionRequest req;
   collision_detection::CollisionResult res;
-  moveit::core::RobotState* state = new moveit::core::RobotState(child->getRobotModel());
+  std::unique_ptr<moveit::core::RobotState> state = std::make_unique<moveit::core::RobotState>(child->getRobotModel());
   state->setToDefaultValues();
   state->update();
 

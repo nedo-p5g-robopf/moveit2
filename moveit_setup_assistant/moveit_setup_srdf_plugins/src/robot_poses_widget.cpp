@@ -535,7 +535,7 @@ void RobotPosesWidget::doneEditing()
   const std::string& group = group_name_field_->currentText().toStdString();
 
   // Used for editing existing groups
-  srdf::Model::GroupState* searched_data = nullptr;
+  std::unique_ptr<srdf::Model::GroupState> searched_data = nullptr;
 
   // Check that name field is not empty
   if (name.empty())
@@ -555,8 +555,8 @@ void RobotPosesWidget::doneEditing()
   // If creating a new pose, check if the (name, group) pair already exists
   if (!current_edit_pose_)
   {
-    searched_data = setup_step_.findPoseByName(name, group);
-    if (searched_data != current_edit_pose_)
+    searched_data.reset(setup_step_.findPoseByName(name, group));
+    if (searched_data.get() != current_edit_pose_)
     {
       if (QMessageBox::warning(this, "Warning Saving", "A pose already exists with that name! Overwrite?",
                                QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::No)
@@ -564,7 +564,7 @@ void RobotPosesWidget::doneEditing()
     }
   }
   else
-    searched_data = current_edit_pose_;  // overwrite edited pose
+    searched_data.reset(current_edit_pose_);  // overwrite edited pose
 
   // Save the new pose name or create the new pose ----------------------------
   bool is_new = false;
@@ -572,7 +572,7 @@ void RobotPosesWidget::doneEditing()
   if (searched_data == nullptr)  // create new
   {
     is_new = true;
-    searched_data = new srdf::Model::GroupState();
+    searched_data = std::make_unique<srdf::Model::GroupState>();
   }
 
   // Copy name data ----------------------------------------------------
@@ -585,7 +585,7 @@ void RobotPosesWidget::doneEditing()
   if (is_new)
   {
     setup_step_.getGroupStates().push_back(*searched_data);
-    delete searched_data;
+    searched_data.reset();
   }
 
   // Finish up ------------------------------------------------------
