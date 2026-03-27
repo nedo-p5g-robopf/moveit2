@@ -171,11 +171,11 @@ protected:
     consistency_limits_ = data.consistency_limits_;
     timeout_ = data.timeout_;
     tolerance_ = data.tolerance_;
-    num_fk_tests_ = data.num_fk_tests_;
-    num_ik_cb_tests_ = data.num_ik_cb_tests_;
-    num_ik_tests_ = data.num_ik_tests_;
-    num_ik_multiple_tests_ = data.num_ik_multiple_tests_;
-    num_nearest_ik_tests_ = data.num_nearest_ik_tests_;
+    num_fk_tests_ = static_cast<unsigned int>(data.num_fk_tests_);
+    num_ik_cb_tests_ = static_cast<unsigned int>(data.num_ik_cb_tests_);
+    num_ik_tests_ = static_cast<unsigned int>(data.num_ik_tests_);
+    num_ik_multiple_tests_ = static_cast<unsigned int>(data.num_ik_multiple_tests_);
+    num_nearest_ik_tests_ = static_cast<unsigned int>(data.num_nearest_ik_tests_);
     publish_trajectory_ = data.publish_trajectory_;
   }
 

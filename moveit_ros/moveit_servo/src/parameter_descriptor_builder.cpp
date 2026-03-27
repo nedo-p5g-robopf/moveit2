@@ -87,7 +87,7 @@ ParameterDescriptorBuilder::integerRange(int64_t from_value /*= std::numeric_lim
   msg_.integer_range.resize(1);
   msg_.integer_range[0].from_value = from_value;
   msg_.integer_range[0].to_value = to_value;
-  msg_.integer_range[0].step = step;
+  msg_.integer_range[0].step = static_cast<uint64_t>(std::max(step, static_cast<int64_t>(0)));
   return *this;
 }
 

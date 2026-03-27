@@ -374,7 +374,7 @@ protected:
   public:
     // \brief Construct a node of given degree with at most
     // \e capacity data elements and with given pivot.
-    Node(int degree, int capacity, _T pivot)
+    Node(unsigned int degree, int capacity, _T pivot)
       : degree_(degree)
       , pivot_(std::move(pivot))
       , minRadius_(std::numeric_limits<double>::infinity())

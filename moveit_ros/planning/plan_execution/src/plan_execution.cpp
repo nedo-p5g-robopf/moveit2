@@ -297,7 +297,7 @@ bool plan_execution::PlanExecution::isRemainingPathValid(const ExecutableMotionP
     std::size_t wpc = t.getWayPointCount();
     collision_detection::CollisionRequest req;
     req.group_name = t.getGroupName();
-    for (std::size_t i = std::max(path_segment.second - 1, 0); i < wpc; ++i)
+    for (std::size_t i = static_cast<std::size_t>(std::max(path_segment.second - 1, 0)); i < wpc; ++i)
     {
       collision_detection::CollisionResult res;
       if (acm)

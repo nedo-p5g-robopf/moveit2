@@ -411,8 +411,8 @@ void DepthImageOctomapUpdater::depthImageCallback(const sensor_msgs::msg::Image:
   {
     sensor_msgs::msg::Image debug_msg;
     debug_msg.header = depth_msg->header;
-    debug_msg.height = h;
-    debug_msg.width = w;
+    debug_msg.height = static_cast<unsigned int>(h);
+    debug_msg.width = static_cast<unsigned int>(w);
     debug_msg.is_bigendian = HOST_IS_BIG_ENDIAN;
     debug_msg.encoding = sensor_msgs::image_encodings::TYPE_32FC1;
     debug_msg.step = w * sizeof(float);
@@ -422,8 +422,8 @@ void DepthImageOctomapUpdater::depthImageCallback(const sensor_msgs::msg::Image:
 
     sensor_msgs::msg::Image filtered_depth_msg;
     filtered_depth_msg.header = depth_msg->header;
-    filtered_depth_msg.height = h;
-    filtered_depth_msg.width = w;
+    filtered_depth_msg.height = static_cast<unsigned int>(h);
+    filtered_depth_msg.width = static_cast<unsigned int>(w);
     filtered_depth_msg.is_bigendian = HOST_IS_BIG_ENDIAN;
     filtered_depth_msg.encoding = sensor_msgs::image_encodings::TYPE_32FC1;
     filtered_depth_msg.step = w * sizeof(float);
@@ -433,8 +433,8 @@ void DepthImageOctomapUpdater::depthImageCallback(const sensor_msgs::msg::Image:
 
     sensor_msgs::msg::Image label_msg;
     label_msg.header = depth_msg->header;
-    label_msg.height = h;
-    label_msg.width = w;
+    label_msg.height = static_cast<unsigned int>(h);
+    label_msg.width = static_cast<unsigned int>(w);
     label_msg.is_bigendian = HOST_IS_BIG_ENDIAN;
     label_msg.encoding = sensor_msgs::image_encodings::RGBA8;
     label_msg.step = w * sizeof(unsigned int);
@@ -448,8 +448,8 @@ void DepthImageOctomapUpdater::depthImageCallback(const sensor_msgs::msg::Image:
   {
     sensor_msgs::msg::Image filtered_msg;
     filtered_msg.header = depth_msg->header;
-    filtered_msg.height = h;
-    filtered_msg.width = w;
+    filtered_msg.height = static_cast<unsigned int>(h);
+    filtered_msg.width = static_cast<unsigned int>(w);
     filtered_msg.is_bigendian = HOST_IS_BIG_ENDIAN;
     filtered_msg.encoding = sensor_msgs::image_encodings::TYPE_16UC1;
     filtered_msg.step = w * sizeof(unsigned short);
