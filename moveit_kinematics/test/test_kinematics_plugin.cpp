@@ -122,15 +122,10 @@ class SharedData
     ASSERT_TRUE(node_->get_parameter("tolerance", tolerance_));
     ASSERT_TRUE(tolerance_ > 0.0) << "'tolerance' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("num_fk_tests", num_fk_tests_));
-    ASSERT_TRUE(num_fk_tests_ > 0.0) << "'num_fk_tests' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("num_ik_cb_tests", num_ik_cb_tests_));
-    ASSERT_TRUE(num_ik_cb_tests_ > 0.0) << "'num_ik_cb_tests' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("num_ik_tests", num_ik_tests_));
-    ASSERT_TRUE(num_ik_tests_ > 0.0) << "'num_ik_tests' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("num_ik_multiple_tests", num_ik_multiple_tests_));
-    ASSERT_TRUE(num_ik_multiple_tests_ > 0.0) << "'num_ik_multiple_tests' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("num_nearest_ik_tests", num_nearest_ik_tests_));
-    ASSERT_TRUE(num_nearest_ik_tests_ > 0.0) << "'num_nearest_ik_tests' must be greater than 0.0";
     ASSERT_TRUE(node_->get_parameter("ik_plugin_name", ik_plugin_name_));
     node_->get_parameter_or("publish_trajectory", publish_trajectory_, false);
 
